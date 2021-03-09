@@ -421,6 +421,14 @@ exports.MessageTypes = [
   null,
   'REPLY',
 ];
+/**
+ * The types of messages that are `System`. The available types are `MessageTypes` excluding:
+ * * DEFAULT
+ * * REPLY
+ * @typedef {string} SystemMessageType
+ */
+exports.SystemMessageTypes = exports.MessageTypes.filter(type => type && type !== 'DEFAULT' && type !== 'REPLY');
+
 
 /**
  * <info>Bots cannot set a `CUSTOM_STATUS`, it is only for custom statuses received from users</info>
