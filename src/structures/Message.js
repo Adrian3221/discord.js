@@ -86,7 +86,7 @@ class Message extends Base {
      * lost if re-fetched</warn>
      * @type {?string}
      */
-    this.nonce = data.nonce;
+    this.nonce = 'nonce' in data ? data.nonce : null;
 
     /**
      * Whether or not this message was sent by Discord, not actually a user (e.g. pin notifications)
