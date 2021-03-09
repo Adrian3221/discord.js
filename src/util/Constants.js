@@ -415,6 +415,10 @@ exports.MessageTypes = [
   null,
   'GUILD_DISCOVERY_DISQUALIFIED',
   'GUILD_DISCOVERY_REQUALIFIED',
+  null,
+  null,
+  null,
+  'REPLY',
 ];
 
 /**
