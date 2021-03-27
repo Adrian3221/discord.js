@@ -161,7 +161,7 @@ class User extends Base {
    * @returns {string}
    */
   displayAvatarURL(options) {
-    return options ? this.avatarURL(options) : this.avatarURL({size: 2048, format: 'png', dynamig: true}) || this.defaultAvatarURL;
+    return options ? this.avatarURL(options) : this.avatarURL({size: 2048, format: 'png', dynamic: true}) || this.defaultAvatarURL;
   }
 
   /**
