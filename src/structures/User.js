@@ -36,42 +36,67 @@ class User extends Base {
   }
 
   _patch(data) {
-    /**
-     * The username of the user
-     * @type {string}
-     * @name User#username
-     */
-    if (data.username) this.username = data.username;
+       if ('username' in data) {
+      /**
+       * The username of the user
+       * @type {?string}
+       */
+      this.username = data.username;
+    } else if (typeof this.username !== 'string') {
+      this.username = null;
+    }
 
-    /**
-     * A discriminator based on username for the user
-     * @type {string}
-     * @name User#discriminator
-     */
-    if (data.discriminator) this.discriminator = data.discriminator;
+    if ('bot' in data || typeof this.bot !== 'boolean') {
+      /**
+       * Whether or not the user is a bot
+       * @type {boolean}
+       */
+      this.bot = Boolean(data.bot);
+    }
 
-    /**
-     * The ID of the user's avatar
-     * @type {?string}
-     * @name User#avatar
-     */
-    if (typeof data.avatar !== 'undefined') this.avatar = data.avatar;
+    if ('discriminator' in data) {
+      /**
+       * A discriminator based on username for the user
+       * @type {?string}
+       */
+      this.discriminator = data.discriminator;
+    } else if (typeof this.discriminator !== 'string') {
+      this.discriminator = null;
+    }
 
-    if (typeof data.bot !== 'undefined') this.bot = Boolean(data.bot);
+    if ('avatar' in data) {
+      /**
+       * The ID of the user's avatar
+       * @type {?string}
+       */
+      this.avatar = data.avatar;
+    } else if (typeof this.avatar !== 'string') {
+      this.avatar = null;
+    }
 
-    /**
-     * Whether the user is an Official Discord System user (part of the urgent message system)
-     * @type {?boolean}
-     * @name User#system
-     */
-    if (typeof data.system !== 'undefined') this.system = Boolean(data.system);
+    if ('system' in data) {
+      /**
+       * Whether the user is an Official Discord System user (part of the urgent message system)
+       * @type {?boolean}
+       */
+      this.system = Boolean(data.system);
+    }
 
-    /**
-     * The locale of the user's client (ISO 639-1)
-     * @type {?string}
-     * @name User#locale
-     */
-    if (data.locale) this.locale = data.locale;
+    if ('locale' in data) {
+      /**
+       * The locale of the user's client (ISO 639-1)
+       * @type {?string}
+       */
+      this.locale = data.locale;
+    }
+
+    if ('public_flags' in data) {
+      /**
+       * The flags for this user
+       * @type {?UserFlags}
+       */
+      this.flags = new UserFlags(data.public_flags);
+    }
 
     /**
      * The ID of the last message sent by the user, if one was sent
