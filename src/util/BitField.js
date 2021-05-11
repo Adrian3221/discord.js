@@ -7,7 +7,7 @@ const { RangeError } = require('../errors');
  */
 class BitField {
   /**
-   * @param {BitFieldResolvable} [bits=0] Bits(s) to read from
+   * @param {BitFieldResolvable} [bits=0] Bit(s) to read from
    */
   constructor(bits) {
     /**
@@ -48,7 +48,7 @@ class BitField {
 
   /**
    * Gets all given bits that are missing from the bitfield.
-   * @param {BitFieldResolvable} bits Bits(s) to check for
+   * @param {BitFieldResolvable} bits Bit(s) to check for
    * @param {...*} hasParams Additional parameters for the has method, if any
    * @returns {string[]}
    */
@@ -147,7 +147,9 @@ class BitField {
     if (bit instanceof BitField) return bit.bitfield;
     if (Array.isArray(bit)) return bit.map(p => this.resolve(p)).reduce((prev, p) => prev | p, 0);
     if (typeof bit === 'string' && typeof this.FLAGS[bit] !== 'undefined') return this.FLAGS[bit];
-    throw new RangeError('BITFIELD_INVALID');
+    const error = new RangeError('BITFIELD_INVALID');
+    error.bit = bit;
+    throw error;
   }
 }
 
